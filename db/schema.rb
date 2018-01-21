@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+  # These are extensions that must be enabled in order to support this database
+
 ActiveRecord::Schema.define(version: 2018_01_21_055643) do
 
-  # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "clients", force: :cascade do |t|
