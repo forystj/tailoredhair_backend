@@ -5,22 +5,12 @@ class CommentsController < ApplicationController
   def index
     @comments = Comment.all
 
-    render json: @comments.to_json(include: :users)
-  end
-
-  def index
-    @comments = Comment.all
-
-    render json: @comments.to_json(include: :looks)
+    render json: @comments.to_json(include: [:users, :looks])
   end
 
   # GET /comments/1
   def show
-    render json: @comment.to_json(include: :users)
-  end
-
-  def show
-    render json: @comment.to_json(include: :looks)
+    render json: @comment.to_json(include: [:users, :looks])
   end
 
   # POST /comments

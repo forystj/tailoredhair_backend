@@ -7,16 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.create([
-  { username: 'foryst', password_digest: '123', stylist_status: false, client_status: true },
-  { username: 'andrew', password_digest: '123', stylist_status: true, client_status: false }
-])
-
-Stylist.create([
-  { avatar: 'https://www.designboom.com/wp-content/uploads/2017/12/these-cat-hair-cat-hats-are-going-viral-not-to-be-mistaken-for-diors-FW17-beret-designboom-03.jpg', specialty: ['color'], enjoy: ['bleach & tone', 'balayage'], location: 'San Francisco' }
-])
-
-Client.create([
-  { avatar: 'https://i.pinimg.com/736x/c3/0e/9b/c30e9bbaef3532e9b5b8964024f25a71--princess-cat-princess-aurora.jpg' }
+  { username: 'foryst', password_digest: '123', stylist_status: false, client_status: true, avatar: 'https://i.pinimg.com/736x/c3/0e/9b/c30e9bbaef3532e9b5b8964024f25a71--princess-cat-princess-aurora.jpg' },
+  { username: 'andrew', password_digest: '123', stylist_status: true, client_status: false, avatar: 'https://www.designboom.com/wp-content/uploads/2017/12/these-cat-hair-cat-hats-are-going-viral-not-to-be-mistaken-for-diors-FW17-beret-designboom-03.jpg', specialty: ['color'], enjoy: ['bleach & tone', 'balayage'], location: 'San Francisco'  }
 ])
 
 Look.create([
@@ -29,7 +21,7 @@ Post.create([
 ])
 
 Comment.create([
-    { content: 'love it' }
+  { content: 'love it' }
 ])
 
 p "seeded database"

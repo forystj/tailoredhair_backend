@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :userslooks
+  resources :userlooks
+  resources :userposts
   resources :lookcomments
   resources :usercomments
   resources :stylistposts

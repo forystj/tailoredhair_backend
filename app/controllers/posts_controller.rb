@@ -5,12 +5,12 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all
 
-    render json: @posts.to_json(include: :stylists)
+    render json: @posts.to_json(include: :users)
   end
 
   # GET /posts/1
   def show
-    render json: @post.to_json(include: :stylists)
+    render json: @post.to_json(include: :users)
   end
 
   # POST /posts
