@@ -5,12 +5,12 @@ class UsercommentsController < ApplicationController
   def index
     @usercomments = Usercomment.all
 
-    render json: @usercomments
+    render json: @usercomments.to_json(include: [:user, :comment])
   end
 
   # GET /usercomments/1
   def show
-    render json: @usercomment
+    render json: @usercomment.to_json(include: [:user, :comment])
   end
 
   # POST /usercomments

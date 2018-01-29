@@ -1,4 +1,4 @@
 class Post < ApplicationRecord
-  has_many :stylistposts
-  has_many :stylists, through: :stylistposts
+  has_many :userposts
+  has_many :users, through: :userposts
 end

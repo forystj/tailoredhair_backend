@@ -1,42 +1,23 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
+  before_action :authenticate_token, except: [:login, :create]
+  before_action :authorize_user, except: [:login, :create, :index]
+
 
   # GET /users
   def index
     @users = User.all
 
     render json:
-    @users.to_json(include: :stylists)
-  end
-
-  def index
-    @users = User.all
-
-    render json:
-    @users.to_json(include: :clients)
-  end
-
-  def index
-    @users = User.all
-
-    render json:
-    @users.to_json(include: :comments)
+    @users.to_json(include: [:comments, :posts, :looks])
   end
 
 
   # GET /users/1
-  def show
-    render json: @user.to_json(include: :stylists)
-    end
 
   def show
-    render json:
-    @users.to_json(include: :clients)
-  end
-
-  def show
-    render json:
-    @users.to_json(include: :comments)
+    render json: get_current_user
+    @user.to_json(include: [:comments, :posts, :looks])
   end
 
   # POST /users
@@ -64,7 +45,33 @@ class UsersController < ApplicationController
     @user.destroy
   end
 
+  def login
+    user = User.find_by(username: params[:user][:username])
+    if user && user.authenticate(params[:user][:password])
+      token = create_token(user.id, user.username)
+      render json: { status: 200, token: token, user: user }
+    else
+      render json: { status: 401, message: "Unauthorized" }
+    end
+  end
+
   private
+
+  def create_token(id, username)
+    JWT.encode(payload(id, username), ENV['JWT_SECRET'], 'HS256')
+  end
+
+  def payload(id, username)
+    {
+      exp: (Time.now + 30.minutes).to_i,
+      iat: Time.now.to_i,
+      iss: ENV['JWT_ISSUER'],
+      user: {
+        id: id,
+        username: username
+      }
+    }
+  end
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
@@ -72,6 +79,6 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:username, :password_digest, :stylist_status, :client_status)
+      params.require(:user).permit(:username, :password, :stylist_status, :client_status)
     end
 end

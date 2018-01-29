@@ -10,25 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_01_21_055643) do
+ActiveRecord::Schema.define(version: 2018_01_26_004149) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "clients", force: :cascade do |t|
-    t.string "avatar"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "clientstatuses", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "client_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["client_id"], name: "index_clientstatuses_on_client_id"
-    t.index ["user_id"], name: "index_clientstatuses_on_user_id"
-  end
 
   create_table "comments", force: :cascade do |t|
     t.string "content"
@@ -60,42 +45,6 @@ ActiveRecord::Schema.define(version: 2018_01_21_055643) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "stylistlooks", force: :cascade do |t|
-    t.bigint "stylist_id"
-    t.bigint "look_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["look_id"], name: "index_stylistlooks_on_look_id"
-    t.index ["stylist_id"], name: "index_stylistlooks_on_stylist_id"
-  end
-
-  create_table "stylistposts", force: :cascade do |t|
-    t.bigint "stylist_id"
-    t.bigint "post_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["post_id"], name: "index_stylistposts_on_post_id"
-    t.index ["stylist_id"], name: "index_stylistposts_on_stylist_id"
-  end
-
-  create_table "stylists", force: :cascade do |t|
-    t.string "avatar"
-    t.string "specialty", array: true
-    t.string "enjoy", array: true
-    t.string "location"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "styliststatuses", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "stylist_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["stylist_id"], name: "index_styliststatuses_on_stylist_id"
-    t.index ["user_id"], name: "index_styliststatuses_on_user_id"
-  end
-
   create_table "usercomments", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "comment_id"
@@ -105,6 +54,24 @@ ActiveRecord::Schema.define(version: 2018_01_21_055643) do
     t.index ["user_id"], name: "index_usercomments_on_user_id"
   end
 
+  create_table "userlooks", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "look_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["look_id"], name: "index_userlooks_on_look_id"
+    t.index ["user_id"], name: "index_userlooks_on_user_id"
+  end
+
+  create_table "userposts", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_userposts_on_post_id"
+    t.index ["user_id"], name: "index_userposts_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
@@ -112,18 +79,18 @@ ActiveRecord::Schema.define(version: 2018_01_21_055643) do
     t.boolean "client_status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "avatar"
+    t.string "location"
+    t.string "specialty", array: true
+    t.string "enjoy", array: true
   end
 
-  add_foreign_key "clientstatuses", "clients"
-  add_foreign_key "clientstatuses", "users"
   add_foreign_key "lookcomments", "comments"
   add_foreign_key "lookcomments", "looks"
-  add_foreign_key "stylistlooks", "looks"
-  add_foreign_key "stylistlooks", "stylists"
-  add_foreign_key "stylistposts", "posts"
-  add_foreign_key "stylistposts", "stylists"
-  add_foreign_key "styliststatuses", "stylists"
-  add_foreign_key "styliststatuses", "users"
   add_foreign_key "usercomments", "comments"
   add_foreign_key "usercomments", "users"
+  add_foreign_key "userlooks", "looks"
+  add_foreign_key "userlooks", "users"
+  add_foreign_key "userposts", "posts"
+  add_foreign_key "userposts", "users"
 end
