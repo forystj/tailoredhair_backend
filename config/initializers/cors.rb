@@ -7,7 +7,8 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'https://tailoredhair.herokuapp.com'
+
+    origins 'localhost:3001', 'https://tailoredhair.herokuapp.com'
 
     resource '*',
       headers: :any,
