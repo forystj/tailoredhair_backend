@@ -1,19 +1,12 @@
 Rails.application.routes.draw do
   root 'welcome#index'
-  resources :userslooks
   resources :userlooks
   resources :userposts
   resources :lookcomments
   resources :usercomments
-  resources :stylistposts
-  resources :stylistlooks
-  resources :clientstatuses
-  resources :styliststatuses
   resources :comments
   resources :posts
   resources :looks
-  resources :clients
-  resources :stylists
   resources :users do
     collection do
       post '/login', to: 'users#login'
