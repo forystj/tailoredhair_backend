@@ -18,7 +18,7 @@ class LookcommentsController < ApplicationController
     @lookcomment = Lookcomment.new(lookcomment_params)
 
     if @lookcomment.save
-      render json: @lookcomment, status: :created, location: @lookcomment
+      render json: @lookcomment, status: :created
     else
       render json: @lookcomment.errors, status: :unprocessable_entity
     end

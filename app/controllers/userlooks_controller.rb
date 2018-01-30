@@ -18,7 +18,7 @@ class UserlooksController < ApplicationController
     @userlook = Userlook.new(userlook_params)
 
     if @userlook.save
-      render json: @userlook, status: :created, location: @userlook
+      render json: @userlook, status: :created
     else
       render json: @userlook.errors, status: :unprocessable_entity
     end

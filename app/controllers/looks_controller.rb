@@ -18,7 +18,7 @@ class LooksController < ApplicationController
     @look = Look.new(look_params)
 
     if @look.save
-      render json: @look, status: :created, location: @look
+      render json: @look, status: :created
     else
       render json: @look.errors, status: :unprocessable_entity
     end

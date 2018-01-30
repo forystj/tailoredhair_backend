@@ -18,7 +18,7 @@ class UserpostsController < ApplicationController
     @userpost = Userpost.new(userpost_params)
 
     if @userpost.save
-      render json: @userpost, status: :created, location: @userpost
+      render json: @userpost, status: :created
     else
       render json: @userpost.errors, status: :unprocessable_entity
     end

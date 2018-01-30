@@ -18,7 +18,7 @@ class UsercommentsController < ApplicationController
     @usercomment = Usercomment.new(usercomment_params)
 
     if @usercomment.save
-      render json: @usercomment, status: :created, location: @usercomment
+      render json: @usercomment, status: :created
     else
       render json: @usercomment.errors, status: :unprocessable_entity
     end
