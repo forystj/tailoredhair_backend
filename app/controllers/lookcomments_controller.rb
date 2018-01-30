@@ -5,12 +5,12 @@ class LookcommentsController < ApplicationController
   def index
     @lookcomments = Lookcomment.all
 
-    render json: @lookcomments(include: [:look, :comment])
+    render json: @lookcomments.to_json(include: [:look, :comment])
   end
 
   # GET /lookcomments/1
   def show
-    render json: @lookcomment(include: [:look, :comment])
+    render json: @lookcomment.to_json(include: [:look, :comment])
   end
 
   # POST /lookcomments
