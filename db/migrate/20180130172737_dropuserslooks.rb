@@ -1,0 +1,5 @@
+class Dropuserslooks < ActiveRecord::Migration[5.2]
+  def change
+    drop_table :userlooks
+  end
+end
