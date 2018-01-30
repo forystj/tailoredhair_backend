@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'root#index'
+  root 'welcome#index'
   resources :userslooks
   resources :userlooks
   resources :userposts
